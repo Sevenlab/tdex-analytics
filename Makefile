@@ -16,7 +16,7 @@ build: build-server build-cli
 
 ## proto: compile proto files
 proto:
-	buf generate
+	cd api-spec/protobuf; buf mod update; cd ../../; buf generate buf.build/tdex-network/tdex-protobuf; buf generate
 
 ## pit: provision influxdb used for testing test
 pit:
@@ -89,7 +89,7 @@ pgcreatetestdb:
 
 ## dev: create dev env
 dev:
-	 docker-compose --env-file .env.dev up -d
+	 docker-compose --env-file .env.dev up -d --build --force-recreate 
 
 ## dev-down: stop dev env, remove volumes
 dev-down:
